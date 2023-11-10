@@ -29,9 +29,9 @@ class FileCreator
     const CONTENT_NEW = 2; // clear file and set content if file exists.
             
     /**
-     * @var null|string The file content.
+     * @var string The file content.
      */
-    protected ?string $content = null;
+    protected string $content = '';
 
     /**
      * @var array Writers
@@ -78,11 +78,15 @@ class FileCreator
     /**
      * Adds newline.
      *
+     * @param int $num The number of new lines.
      * @return FileCreator
      */    
-    public function newline(): FileCreator
+    public function newline(int $num = 1): FileCreator
     {
-        $this->content .= "\r\n";
+        for ($i = 1; $i <= $num; $i++) {
+            $this->content .= "\r\n";
+        }
+        
         return $this;
     }
             
@@ -160,7 +164,7 @@ class FileCreator
         }
         
         // Write the content to the file.
-        if (is_string($this->content))
+        if ($this->content !== '')
         {
             if (fwrite($this->fileHandle, $this->content) === false)
             {
