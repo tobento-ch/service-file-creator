@@ -100,7 +100,7 @@ try {
         ->newline()
         ->content('Lorem ipsum')
         ->create('home/public/files/filename.txt', FileCreator::CONTENT_NEW)
-        ->newline()
+        ->newline(num: 2)
         ->content('Lorem ipsum')
         ->create('home/public/files/filename.txt', FileCreator::CONTENT_APPEND);
     // it is ok.
