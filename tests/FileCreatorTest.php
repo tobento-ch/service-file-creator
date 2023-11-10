@@ -38,6 +38,22 @@ class FileCreatorTest extends TestCase
         (new Dir())->delete(__DIR__.'/files/');
 	}
     
+    public function testCreateMethodWithNewlines()
+    {
+        (new FileCreator())
+            ->content('Lorem ipsum')
+            ->newline(num: 2)
+            ->content('Lorem ipsum')
+            ->create(__DIR__.'/files/filename.txt', FileCreator::CONTENT_NEW);
+        
+		$this->assertSame(
+            'Lorem ipsum'.PHP_EOL.PHP_EOL.'Lorem ipsum',
+            (new File(__DIR__.'/files/filename.txt'))->getContent()
+        );
+        
+        (new Dir())->delete(__DIR__.'/files/');
+	}
+    
     public function testCreateMethodWithContentAndNewline()
     {
         (new FileCreator())
